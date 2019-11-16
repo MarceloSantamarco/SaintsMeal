@@ -5,12 +5,15 @@
 
   <div class='container'>
     <div class="form-inputs">
-      <%= f.input :amount %>
-      <%= f.input :date %>
       <%= f.label "Cliente" %>
       <%= f.select :customer_id, @customers %>
       <%= f.label "Mesa"%>
       <%= f.select :table_id, @tables %>
+      
+      <%= fields_for :amounts do |field| %>
+        <%= field.select :item_id, @items %>
+        <%= field.text_field :amount %>
+      <% end %>
     </div>
 
     <div class="form-actions">

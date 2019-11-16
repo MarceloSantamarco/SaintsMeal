@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_15_235449) do
+ActiveRecord::Schema.define(version: 2019_11_16_005907) do
+
+  create_table "amounts", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "request_id"
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -45,12 +53,12 @@ ActiveRecord::Schema.define(version: 2019_11_15_235449) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.integer "amount"
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "customer_id"
     t.integer "table_id"
+    t.integer "waiter_id"
   end
 
   create_table "tables", force: :cascade do |t|

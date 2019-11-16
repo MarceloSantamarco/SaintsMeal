@@ -1,14 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Requests</h1>
+<h1>Pedidos</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Amount</th>
-      <th>Date</th>
+      <th>Quantidade</th>
+      <th>Data</th>
       <th>Cliente</th>
       <th>Mesa</th>
+      <th>Itens</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +17,10 @@
   <tbody>
     <% @requests.each do |request| %>
       <tr>
-        <td><%= request.amount %></td>
-        <td><%= request.date %></td>
+        <td><%= request.created_at %></td>
         <td><%= request.customer_id %></td>
         <td><%= request.table_id %></td>
+        <td><%= request.amounts.first.item_id %></td>
         <td><%= link_to 'Show', request %></td>
         <td><%= link_to 'Edit', edit_request_path(request) %></td>
         <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>

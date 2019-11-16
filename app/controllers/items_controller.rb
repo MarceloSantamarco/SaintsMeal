@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :find_menu
 
   # GET /items
   # GET /items.json
@@ -67,8 +68,12 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
     end
 
+    def find_menu
+      @menus = Menu.all.pluck(:name, :id)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :kind, :description, :price)
+      params.require(:item).permit(:name, :kind, :description, :price, :menu_id)
     end
 end

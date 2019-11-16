@@ -16,6 +16,7 @@ class RequestsController < ApplicationController
   # GET /requests/new
   def new
     @request = Request.new
+    @request.amounts.build
   end
 
   # GET /requests/1/edit
@@ -70,11 +71,12 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:amount, :date, :customer_id, :table_id)
+      params.require(:request).permit(:amount, :date, :customer_id, :table_id, amounts_attributes: [:item_id, :amount])
     end
 
     def find_ids
       @customers = Customer.all.pluck(:name, :id)
       @tables = Table.all.pluck(:id)
+      @items = Item.all.pluck(:name, :id)
     end
 end
