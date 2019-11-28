@@ -16,7 +16,6 @@ class RequestsController < ApplicationController
   # GET /requests/new
   def new
     @request = Request.new
-    @request.amounts.build
   end
 
   # GET /requests/1/edit
@@ -27,7 +26,6 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(request_params)
-
     respond_to do |format|
       if @request.save
         format.html { redirect_to @request, notice: 'Request was successfully created.' }
@@ -53,6 +51,38 @@ class RequestsController < ApplicationController
     end
   end
 
+  def create_amounts
+    @request = Request.find(params[:request_id])
+    @request.amounts.new(amounts_params) unless @request.amounts.nil?
+    if @request.save!      
+      render json: @request, status: 200
+    else
+     render json: @request.errors, status: :unprocessable_entity
+    end
+  end
+
+  def find_amounts
+    amounts = Request.find(params[:request_id]).amounts.pluck(:id, :item_id, :amount)
+    amounts.each do |amount|
+      begin
+        amount << Item.find(amount[1]).name
+      rescue
+        next
+      end
+    end
+    render json: amounts
+  end
+
+  def delete_amount
+    @request = Request.find(params[:request_id])
+    amount = @request.amounts.find(params[:id])
+    if amount.destroy!
+      render json: @request, status: 200
+    else
+      render json: @request.errors, status: :unprocessable_entity
+    end
+  end
+
   # DELETE /requests/1
   # DELETE /requests/1.json
   def destroy
@@ -71,7 +101,11 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:amount, :date, :customer_id, :table_id, amounts_attributes: [:item_id, :amount])
+      params.require(:request).permit(:amount, :date, :customer_id, :table_id)
+    end
+
+    def amounts_params
+      params.require(:amounts).permit(:id, :item_id, :amount)
     end
 
     def find_ids

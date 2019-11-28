@@ -2,13 +2,17 @@
 
 <p>
   <strong>Amount:</strong>
-  <%= @items %>
+  <ul>
+    <% @request.amounts.each do |amount| %>
+      <li><%= Item.find(amount.item_id).name %>, <%= amount.amount %></li>
+    <%end%>
+  </ul>
 </p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @request.date %>
+  <strong>A data e hora do pedido foi:</strong>
+  <%= @request.created_at.strftime("%d/%m/%Y em %I:%M") %>
 </p>
 
-<%= link_to 'Edit', edit_request_path(@request) %> |
-<%= link_to 'Back', requests_path %>
+<%= link_to 'Continuar preenchendo', edit_request_path(@request) %> |
+<%= link_to 'Voltar', requests_path %>

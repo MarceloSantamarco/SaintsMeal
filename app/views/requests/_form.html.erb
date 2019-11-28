@@ -1,23 +1,19 @@
 
-<%= simple_form_for(@request) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class='container'>
+  <%= simple_form_for(@request) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class='container'>
-    <div class="form-inputs">
-      <%= f.label "Cliente" %>
-      <%= f.select :customer_id, @customers %>
-      <%= f.label "Mesa"%>
-      <%= f.select :table_id, @tables %>
-      
-      <%= fields_for :amounts do |field| %>
-        <%= field.select :item_id, @items %>
-        <%= field.text_field :amount %>
-      <% end %>
+    <div class='container'>
+      <div class="form-inputs">
+        <%= f.label "Cliente" %>
+        <%= f.select :customer_id, @customers %>
+        <%= f.label "Mesa"%>
+        <%= f.select :table_id, @tables %>
+        <%= f.button :submit %>
+      </div>
     </div>
-
-    <div class="form-actions">
-      <%= f.button :submit %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+  <br>
+  <%= react_component("Items", allItems: @items, request: @request)%>
+</div>

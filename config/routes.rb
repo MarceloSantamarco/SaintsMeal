@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   resources :tables
   resources :items
   resources :menus
-  resources :requests
+  resources :requests do
+    patch '/amounts', to: 'requests#create_amounts'
+    get '/amounts/all', to: 'requests#find_amounts'
+    delete '/amounts/:id/delete', to: 'requests#delete_amount'
+  end
   resources :customers
   devise_for :users
   root 'requests#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
