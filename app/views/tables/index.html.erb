@@ -6,6 +6,8 @@
   <thead>
     <tr>
       <th>Número</th>
+      <th>Abertura</th>
+      <th>Valor atual</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +15,9 @@
   <tbody>
     <% @tables.each do |table| %>
       <tr>
-        <td><%= table.id %></td>
+        <td><%= table.number %></td>
+        <td><%= opened_at(table) %></td>
+        <td><%= count_requests(table) %></td>
         <td><%= link_to 'Show', table %></td>
         <td><%= link_to 'Edit', edit_table_path(table) %></td>
         <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>

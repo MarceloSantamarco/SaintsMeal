@@ -1,4 +1,4 @@
 class Request < ApplicationRecord
-    has_one :customer
-    has_many :amounts
+    belongs_to :customer
+    has_many :amounts, dependent: :destroy
 end

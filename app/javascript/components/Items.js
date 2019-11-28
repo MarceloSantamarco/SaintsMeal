@@ -5,7 +5,7 @@ export default function Items({allItems, request}) {
 
   let [fields, setFields] = useState([]);
   let [amount, setAmount] = useState({})
-  let [item, setItem] = useState({})
+  let [item, setItem] = useState(allItems[0][1])
 
   useEffect(()=>{
     getAmounts();

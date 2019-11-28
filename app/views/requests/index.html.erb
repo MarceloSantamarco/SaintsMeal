@@ -9,6 +9,7 @@
       <th>Cliente</th>
       <th>Mesa</th>
       <th>Itens</th>
+      <th>Garçom</th>
       <th>Conta atual</th>
       <th colspan="3"></th>
     </tr>
@@ -18,11 +19,10 @@
     <% @requests.each do |request| %>
       <tr>
         <td><%= request.created_at.strftime("%d/%m/%Y em %I:%M") %></td>
-        <td><%= request.customer_id %></td>
-        <td><%= request.table_id %></td>
-        <% unless request.amounts.nil? %>
-          <td><%= request.amounts.pluck(:amount).count %></td>
-        <% end %>
+        <td><%= find_customer(request.customer_id) %></td>
+        <td><%= find_table(request.table_id) %></td>
+        <td><%= count_items(request) %></td>
+        <td><%= find_waiter(request.waiter_id) %></td>
         <td>R$ <%= calculation(request.amounts) %></td>
         <td><%= link_to 'Abrir ', request %></td>
         <td><%= link_to '| Editar | ', edit_request_path(request) %></td>

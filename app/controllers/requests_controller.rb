@@ -101,7 +101,7 @@ class RequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_params
-      params.require(:request).permit(:amount, :date, :customer_id, :table_id)
+      params.require(:request).permit(:amount, :customer_id, :table_id, :waiter_id)
     end
 
     def amounts_params
@@ -110,7 +110,8 @@ class RequestsController < ApplicationController
 
     def find_ids
       @customers = Customer.all.pluck(:name, :id)
-      @tables = Table.all.pluck(:id)
+      @tables = Table.all.pluck(:number, :id)
       @items = Item.all.pluck(:name, :id)
+      @waiters = Waiter.all.pluck(:name, :id)
     end
 end

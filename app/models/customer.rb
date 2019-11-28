@@ -1,3 +1,3 @@
 class Customer < ApplicationRecord
-    has_many :requests
+    has_many :requests, dependent: :destroy
 end
