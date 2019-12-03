@@ -1,0 +1,24 @@
+<div class="transparent"></div>
+<div id="side-menu">
+    <div id="slide-menu-header">
+        <% if user_signed_in? %>
+            <h5 class="lead">Olá, <%= current_user.email %></h5>
+        <% end %>
+    </div>
+    <div id="slide-menu-body">
+        <ul class="mt-3">
+            <li class="lead"><%= link_to "Clientes", customers_path()%></li>
+            <li class="lead"><%= link_to "Pedidos", requests_path()%></li>
+            <li class="lead"><%= link_to "Sair", destroy_user_session_path(), method: :delete %></li>
+        </ul>
+    </div>
+</div>
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="icone-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo mx-auto"><%= image_tag("saintsmeal.png", alt: "Logo")%></div>
+    </div>
+    
+</nav>

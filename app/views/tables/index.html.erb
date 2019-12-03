@@ -18,9 +18,9 @@
         <td><%= table.number %></td>
         <td><%= opened_at(table) %></td>
         <td><%= count_requests(table) %></td>
-        <td><%= link_to 'Show', table %></td>
-        <td><%= link_to 'Edit', edit_table_path(table) %></td>
-        <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Editar|', edit_table_path(table) %></td>
+        <td><%= link_to 'Excluir|', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Pedidos', table_requests_path(table_id: table.id) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -39,20 +39,36 @@ export default function Items({allItems, request}) {
 
   return (
     <div>
-      <div>
-        <select disabled={!request.id ? 'disabled' : ''} onChange={(e)=> setItem(e.target.value)} value={item}>
-          { allItems.map( (item) =>
-            <option key={item[1]} value={item[1]}>{item[0]}</option>
-          )}
-        </select>
-        <input disabled={!request.id ? 'disabled' : ''}  type="text" placeholder="Quantidade" onChange={e => setAmount(e.target.value)}/>
-        <button disabled={!request.id ? 'disabled' : ''}  className='btn' type="button" onClick={() => createAmount()}>Add Item</button>
+      <div className="row">
+        <div className='col-md-4'>
+          <div className="form-group">
+            <label>Prato</label>
+            <select disabled={!request.id ? 'disabled' : ''} onChange={(e)=> setItem(e.target.value)} value={item} className="form-control">
+              { allItems.map( (item) =>
+                <option key={item[1]} value={item[1]}>{item[0]}</option>
+              )}
+            </select>
+          </div>
+        </div>
+        <div className='col-md-4'>
+          <div className="form-group">
+            <label>Quantidade</label>
+            <input disabled={!request.id ? 'disabled' : ''}  type="text" className='form-control' placeholder="Quantidade" onChange={e => setAmount(e.target.value)}/>
+          </div>
+        </div>
+        <div className='col-md-4'>
+          <br/>
+          <div className="form-group">
+            <button disabled={!request.id ? 'disabled' : ''}  className='btn btn-success' type="button" onClick={() => createAmount()}>Add Item</button>
+          </div>
+        </div>
       </div>
-      <table>
+      <table className="table table-striped table-hover table-light mt-3">
         <thead>
           <tr>
             <th>Nome</th>
             <th>Quantidade</th>
+            <th>Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +77,7 @@ export default function Items({allItems, request}) {
               <tr key={`${field.id}`} id={`${field.id}`}>
                 <td>{field.item_name}</td>
                 <td>{field.amount}</td>
-                <td><button type='button' onClick={(e)=>removeAmount(e)}>X</button></td>
+                <td><button type='button' className='btn btn-danger' onClick={(e)=>removeAmount(e)}><i class="far fa-trash-alt"></i></button></td>
               </tr>
             );
           })}

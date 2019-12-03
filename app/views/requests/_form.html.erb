@@ -1,21 +1,34 @@
 
-<div class='container'>
-  <%= simple_form_for(@request) do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="container-fluid bg-dark cont">
+  <div class="row">
+    <div class="card bg-light col-sm-6 mt-3 mx-auto">
+      <div class="card-body">
+        <h2 class="card-title">Pedido</h2>
+        <%= simple_form_for(@request) do |f| %>
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <div class='container'>
-      <div class="form-inputs">
-        <%= f.label "Cliente" %>
-        <%= f.select :customer_id, @customers %>
-        <%= f.label "Mesa"%>
-        <%= f.select :table_id, @tables %>
-        <%= f.label "Garçom"%>
-        <%= f.select :waiter_id, @waiters %>
-        <%= f.button :submit %>
+          <div class="form-group">
+            <%= f.label "Cliente" %>
+            <%= f.input :customer_id, collection: @customers, prompt: :translate, class: "form-control", label: false %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Mesa"%>
+            <%= f.input :table_id, collection: @tables, prompt: :translate, class: "form-control", label: false %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Garçom"%>
+            <%= f.input :waiter_id, collection: @waiters, prompt: :translate, class: "form-control", label: false %>
+          </div>
+          <%= f.button :submit, class: "btn btn-block btn-outline-secondary" %>
+        <% end %>
       </div>
     </div>
-  <% end %>
-  <br>
-  <%= react_component("Items", allItems: @items, request: @request)%>
+    <div class="card bg-light col-sm-6 mt-3 mx-auto">
+      <div class="card-body">
+        <h2 class="card-title">Itens</h2>
+        <%= react_component("Items", allItems: @items, request: @request)%>
+      </div>
+    </div>
+  </div>
 </div>

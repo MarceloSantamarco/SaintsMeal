@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'requests/tables/:table_id', to: 'requests#table_requests', as: 'table_requests'
   resources :waiters
-  resources :tables
+  resources :tables do
+    get '/bill', to: 'tables#generate_bill', as: 'generate_bill'
+  end
   resources :items
   resources :menus
   resources :requests do

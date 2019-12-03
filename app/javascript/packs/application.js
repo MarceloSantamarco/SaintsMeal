@@ -7,7 +7,8 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-
+require('jquery')
+import "@fortawesome/fontawesome-free/js/all";
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -19,3 +20,20 @@ require("channels")
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
+
+$(document).ready(function () {
+    $('.icone-menu').click(function (e) { 
+        e.preventDefault();
+        $('.transparent').show()
+        $('#side-menu').animate({
+            marginLeft: "0"
+        }, 300)
+    });
+
+    $('.transparent').click(function (e) { 
+        $('.transparent').hide()
+        $('#side-menu').animate({
+            marginLeft: "-25%"
+        }, 300)
+    });
+});

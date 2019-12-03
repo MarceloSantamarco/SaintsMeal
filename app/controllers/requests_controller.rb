@@ -8,6 +8,11 @@ class RequestsController < ApplicationController
     @requests = Request.all
   end
 
+  def table_requests
+    @requests = Request.where(table_id: params[:table_id])
+    render template: 'requests/index'
+  end
+
   # GET /requests/1
   # GET /requests/1.json
   def show

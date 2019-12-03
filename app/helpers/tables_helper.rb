@@ -1,10 +1,10 @@
 module TablesHelper
     def opened_at(table)
-        Table.find(table.id).requests.pluck(:created_at).sort().first.strftime("%d%m%Y %I:%M")
+        table.requests.pluck(:created_at).sort().first.strftime("%d%m%Y %I:%M")
     end
 
     def count_requests(table)
-        requests = Table.find(table.id).requests
+        requests = table.requests
         bill = []
         requests.map(&:amounts).each do |amount|
             amount.each do |requested_item|
