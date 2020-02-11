@@ -8,6 +8,11 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
+  def items_by_menu
+    @items = Item.where(menu_id: params[:menu_id])
+    render template: 'items/index'
+  end
+
   # GET /items/1
   # GET /items/1.json
   def show

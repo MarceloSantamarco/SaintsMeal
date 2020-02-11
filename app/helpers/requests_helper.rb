@@ -4,7 +4,7 @@ module RequestsHelper
         amounts.each do |amount|
             bill << Item.find(amount.item_id).try(:price) * amount.amount
         end
-        bill.sum()
+        bill.sum().round(2)
     end
 
     def count_items(request)
@@ -20,6 +20,6 @@ module RequestsHelper
     end
 
     def find_waiter(waiter_id)
-        Waiter.find(waiter_id).name
+        Waiter.find(waiter_id).name unless waiter_id.nil?
     end
 end
