@@ -12,7 +12,9 @@
             <li class="lead"><%= link_to "Mesas", tables_path()%></li>
             <li class="lead"><%= link_to "Cardápios", menus_path()%></li>
             <li class="lead"><%= link_to "Garçons", waiters_path()%></li>
-            <li class="lead"><%= link_to "Sair", destroy_user_session_path(), method: :delete %></li>
+            <% if user_signed_in? %>
+                <li class="lead"><%= link_to "Sair", destroy_user_session_path(), method: :delete %></li>
+            <% end %>
         </ul>
     </div>
 </div>
