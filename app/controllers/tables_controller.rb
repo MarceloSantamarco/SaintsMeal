@@ -1,10 +1,34 @@
 class TablesController < ApplicationController
-  before_action :set_table, only: [:show, :edit, :update, :destroy]
+  before_action :set_table, only: [:show, :edit, :update, :destroy,:generate_bill]
 
   # GET /tables
   # GET /tables.json
   def index
-    @tables = Table.all.filter{|tb| tb.requests.present?}
+    @tables = Table.all
+  end
+
+  def generate_bill
+    requests = @table.requests
+
+    msg = "Saint's Meal - #{Time.now}\n\n"
+    requests.each do |request|
+      bill = []
+      msg += "Cliente: #{Customer.find(request.customer_id).name}, CPF: #{Customer.find(request.customer_id).CPF}\n\n\n"
+      msg += "Garçom: #{Waiter.find(request.waiter_id).name}\n\n"
+      msg += "Pedidos:\n"
+      request.amounts.each do |amount|
+        msg += "#{Item.find(amount.item_id).name}  ----> \t x#{amount.amount}\n"
+        bill << Item.find(amount.item_id).price * amount.amount
+      end
+      bill = bill.sum().round(2)
+      msg += "\n|----------------------------------|\n"
+      msg += "          Total: #{bill}            \n"
+      msg += "|----------------------------------|"
+
+      msg += "\n\n\n--------------------- DESTAQUE AQUI ------------------------\n\n\n"
+
+    end
+    send_data msg, filename: "Conta.txt"
   end
 
   # GET /tables/1

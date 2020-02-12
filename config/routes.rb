@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get 'requests/tables/:table_id', to: 'requests#table_requests', as: 'table_requests'
+  get 'items/menus/:menu_id', to: 'items#items_by_menu', as: 'menu_items'
+  get 'tables/:id/bill', to: 'tables#generate_bill', as: 'generate_bill'
+  post 'tables/waiters/', to:  'tables#waiter_exists', as: 'waiter_exists'
   resources :waiters
   resources :tables do
     get '/bill', to: 'tables#generate_bill', as: 'generate_bill'
@@ -13,5 +16,5 @@ Rails.application.routes.draw do
   end
   resources :customers
   devise_for :users
-  root 'requests#index'
+  root 'tables#index'
 end
