@@ -13,6 +13,15 @@ class RequestsController < ApplicationController
     render template: 'requests/index'
   end
 
+  def waiter_exists
+    waiter = Table.find(table_id).try(:requests).first.waiter_id
+    if waiter.present?
+      render json: {waiter: {id: waiter, nome:Waiter.find(waiter).name}}
+    else
+      false
+    end
+  end
+
   # GET /requests/1
   # GET /requests/1.json
   def show

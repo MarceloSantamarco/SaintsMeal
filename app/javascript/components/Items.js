@@ -32,6 +32,7 @@ export default function Items({allItems, request}) {
 
   function removeAmount(e) {
     let amount = (e.target.parentNode).parentNode.id;
+    console.log(amount)
     axios.delete(`http://localhost:3000/requests/${request.id}/amounts/${amount}/delete`).then(() =>{
       getAmounts();
     })

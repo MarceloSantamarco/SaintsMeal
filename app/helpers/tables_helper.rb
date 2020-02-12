@@ -1,6 +1,6 @@
 module TablesHelper
     def opened_at(table)
-        table.requests.pluck(:created_at).sort().first.strftime("%d%m%Y %I:%M")
+        table.requests.pluck(:created_at).sort().first.strftime("%d/%m/%Y %I:%M") if table.requests.present?
     end
 
     def count_requests(table)
@@ -11,6 +11,6 @@ module TablesHelper
                 bill << requested_item.amount * Item.find(requested_item.item_id).price
             end
         end
-        bill.sum()
+        bill.sum().round(2)
     end
 end

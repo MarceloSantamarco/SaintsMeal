@@ -9,16 +9,19 @@
         <ul class="mt-3">
             <li class="lead"><%= link_to "Clientes", customers_path()%></li>
             <li class="lead"><%= link_to "Pedidos", requests_path()%></li>
+            <li class="lead"><%= link_to "Mesas", tables_path()%></li>
+            <li class="lead"><%= link_to "Cardápios", menus_path()%></li>
+            <li class="lead"><%= link_to "Garçons", waiters_path()%></li>
             <li class="lead"><%= link_to "Sair", destroy_user_session_path(), method: :delete %></li>
         </ul>
     </div>
 </div>
 <nav class="navbar">
-    <div class="container-fluid">
-        <div class="icone-menu">
-            <i class="fas fa-bars"></i>
+    <div class="container">
+        <div>
+            <i class="fas fa-bars icone-menu"></i>
+            <%= image_tag("saintsmeal.png", alt: "Logo", class: "logo mx-auto")%>
         </div>
-        <div class="logo mx-auto"><%= image_tag("saintsmeal.png", alt: "Logo")%></div>
     </div>
     
 </nav>

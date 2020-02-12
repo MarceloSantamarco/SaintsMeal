@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div class='container' style='height: calc(100vh - 135px)'><p>
   <strong>Amount:</strong>
   <ul>
     <% @request.amounts.each do |amount| %>
@@ -16,3 +16,5 @@
 
 <%= link_to 'Continuar preenchendo', edit_request_path(@request) %> |
 <%= link_to 'Voltar', requests_path %>
+
+</div>

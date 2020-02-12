@@ -44,14 +44,6 @@ ActiveRecord::Schema.define(version: 2019_11_28_192258) do
     t.string "name"
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.string "name"
-    t.string "phone"
-    t.string "CPF"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "requests", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -6,11 +6,32 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+
+    <script>
+        $(document).ready(function () {
+          $('.icone-menu').click(function (e) { 
+              e.preventDefault();
+              $('.transparent').show()
+              $('#side-menu').animate({
+                  marginLeft: "0"
+              }, 300)
+          });
+
+          $('.transparent').click(function (e) { 
+              $('.transparent').hide()
+              $('#side-menu').animate({
+                  marginLeft: "-25%"
+              }, 300)
+          });
+      });
+    </script>
+
   </head>
 
   <body>
     <%= render partial: 'layouts/header', remote: true %>
     <%= yield %>
+    <%= render partial: 'layouts/footer', remote: true %>
   </body>
 </html>
